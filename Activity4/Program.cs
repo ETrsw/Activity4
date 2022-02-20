@@ -57,6 +57,11 @@ public class AppService
         Console.WriteLine("Registration successful.");
     }
 }
+ class Userlist<T>
+{
+    private T[] arr = new T[10];
+    public T this[int i] { get { return arr[i]; } set { arr[i] = value; } }
+}
 class Program
 {
     static void Main ()
@@ -67,11 +72,14 @@ class Program
             Password = "blablabla1",
             Email = "blablabla@dgd.com",
             Age = 90
-        };
+        }; 
+        var userlist = new Userlist<ThisAPI.User>();
+       userlist[0] = newUser;
        var registrationservice = new RegistrationService();
        var appservice = new AppService();
        registrationservice.RegistrationSuccessful += appservice.OnRegistrationSuccess;
        registrationservice.RegisterUser(newUser);
-        Console.ReadKey();
+       Console.WriteLine($"User #1 is {userlist[0].Username}");
+       Console.ReadKey(); 
     }
 }
